@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lesson 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../../pictures/logo.png"> <!-- Adjusted path -->
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: #f5f7fa;
+      color: #204080;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    /* Basic Navbar Style - ideally from shared CSS */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #285197;
+      padding: 0 48px;
+      height: 70px;
+    }
+    .navbar-left { display: flex; align-items: center; }
+    .navbar-logo { width: 2em; height: 2em; margin-right: 14px; object-fit: cover; vertical-align: middle; }
+    .navbar-title-link { display: flex; align-items: center; text-decoration: none; }
+    .navbar-title { color: #fff; font-size: 1.6em; font-weight: 700; letter-spacing: 0.5px; display: flex; align-items: center; }
+    .navbar-title .auto { color: #fff; }
+    .navbar-title .learn { color: #FFD600; margin-left: 2px; }
+    .navbar-title .ph { color: #fff; font-size: 1em; font-weight: 500; margin-left: 4px; }
+    .navbar-menu { display: flex; align-items: center; list-style: none; margin: 0; padding: 0; }
+    .navbar-menu li { margin-left: 32px; }
+    .navbar-menu li a { color: #fff; text-decoration: none; font-size: 1em; font-weight: 600; padding: 8px 18px; border-radius: 6px; transition: background 0.2s, color 0.2s; }
+    .navbar-menu li a:hover, .navbar-menu li a.active { background: #4666a3; }
+
+    .content-container {
+      padding: 20px; /* Adjusted padding, can be fine-tuned */
+      text-align: center;
+      flex-grow: 1; /* Allows this container to grow and fill space between header and footer */
+      display: flex; /* Enable Flexbox */
+      flex-direction: column; /* Stack children vertically */
+      justify-content: center; /* Vertically center content within this container */
+    }
+    .button-container { /* Added for centering buttons */
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .compact-yellow-button { /* New button style */
+      display: inline-block;
+      background-color: #f4c100;
+      color: #fff; /* Changed text color to white */
+      font-weight: bold;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 1.1em;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+      transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    .compact-yellow-button:hover {
+      background-color: #e0b000;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    #section2 { /* This is our target quiz form section */
+      margin-top: 30px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(40,81,151,0.13);
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #section2 h2 { text-align: center; margin-top: 0;}
+    .form-group { margin-bottom: 15px; }
+    .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+    .form-group input[type="text"], .form-group input[type="radio"] { margin-right: 5px; }
+
+    /* Quiz Results Styles */
+    #quizResults {
+      margin-top: 40px; /* Add some space above the results when they appear */
+      padding: 25px;
+      border: 1px solid #ddd;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(40,81,151,0.13);
+      text-align: center;
+      max-width: 600px;
+      width: 90%; /* Responsive width, can be adjusted or removed if max-width is sufficient */
+      margin-left: auto;  /* Center the block horizontally */
+      margin-right: auto; /* Center the block horizontally */
+      /* Removed fixed positioning properties: position, top, left, transform, z-index */
+    }
+    #quizResults h2 { margin-top: 0; color: #285197; }
+    #quizResults p { font-size: 1.1em; margin-bottom: 10px; }
+    #score, #percentage { font-weight: bold; font-size: 1.3em; }
+    #passFailMessage.pass { color: #28a745; font-weight: bold; font-size: 1.2em; }
+    #passFailMessage.fail { color: #dc3545; font-weight: bold; font-size: 1.2em; }
+    .retake-button { /* Can reuse .action-button or define separately */
+        margin-top: 25px;
+        /* Styles inherited from .action-button if class is added */
+    }
+
+    /* PDF Viewer Styles (adapted from lesson1.html) */
+    .pdf-viewer-wrapper {
+      background: #fff;
+      border-radius: 18px;
+      min-height: 380px;
+      max-width: 900px;
+      margin: 20px auto 30px auto; /* Added margin bottom */
+      box-shadow: 0 4px 24px rgba(40,81,151,0.10);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .pdf-controls-container {
+      text-align: center;
+      width: 100%;
+    }
+    .pdf-controls-container.top { margin-bottom: 15px; }
+    .pdf-controls-container.bottom { margin-top: 15px; }
+    .pdf-nav-button {
+      padding: 8px 16px;
+      font-size: 1em;
+      cursor: pointer;
+      background-color: #e0e0e0; /* Basic styling for buttons */
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .pdf-page-info { margin: 0 10px; font-size: 1em; }
+
+    /* Basic Footer Style - ideally from shared CSS */
+    .footer-section {
+      background: #204080;
+      color: #ffffff;
+      padding: 30px 0 20px 0;
+      text-align: center;
+    }
+    .footer-bottom { font-size: 0.98em; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="../../menu.html" class="navbar-title-link">
+        <img src="logo.png" alt="Logo" class="navbar-logo">
+        <div class="navbar-title">
+          <span class="auto">Auto</span><span class="learn">Learn</span> <span class="ph">PH</span>
+        </div>
+      </a>
+    </div>
+    <ul class="navbar-menu">
+      <li><a href="../../menu.html">Home</a></li>
+      <li><a href="../lesson/lesson1.html" class="active">Lessons</a></li>
+      <li><a href="#">Learning Materials</a></li>
+      <li><a href="#">About Us</a></li>
+    </ul>
+  </nav>
+
+  <div class="content-container">
+    <!-- PDF Viewer Section -->
+    <div id="pdfViewerWrapper" class="pdf-viewer-wrapper">
+      <h2 style="color: #285197; margin-bottom: 20px;">Lesson Material</h2>
+      <!-- Top PDF Controls -->
+      <div id="pdf-viewer-controls-top" class="pdf-controls-container top" style="display:none;">
+        <button id="prev-page-top" class="pdf-nav-button">Previous</button>
+        <span class="pdf-page-info">
+          Page <span id="page-num">0</span> / <span id="page-count">0</span>
+        </span>
+        <button id="next-page-top" class="pdf-nav-button">Next</button>
+      </div>
+      <canvas id="pdf-canvas" style="border: 1px solid #ccc; max-width: 100%; display: block; margin: 0 auto;"></canvas>
+      <div id="pdf-loading-error" style="color: red; margin-top: 10px; text-align: center;"></div>
+      <!-- Bottom PDF Controls -->
+      <div id="pdf-viewer-controls-bottom" class="pdf-controls-container bottom" style="display:none;">
+        <button id="prev-page-bottom" class="pdf-nav-button">Previous</button>
+        <button id="next-page-bottom" class="pdf-nav-button">Next</button>
+      </div>
+    </div>
+
+    <div id="quizPageIntro" style="display: none;"> <!-- Wrapper for the main quiz intro, initially hidden -->
+      <h1>Lesson 1 Quiz</h1>
+      <p>Click the button below to start the quiz.</p>
+    </div>
+    <div class="button-container"> <!-- Wrapper for centering -->
+      <button id="takeQuizButton" class="compact-yellow-button">Take the Quiz</button>
+    </div>
+
+    <div id="section2" style="display: none;">
+      <h2>Quiz Questions</h2>
+      <form id="quizForm"> <!-- Removed action and method -->
+        <div class="form-group">
+          <label for="q1">Question 1: What is 2 + 2?</label>
+          <input type="text" id="q1" name="q1" required>
+        </div>
+        <div class="form-group">
+          <p>Question 2: Is HTML a programming language?</p>
+          <label><input type="radio" name="q2" value="yes" required> Yes</label>
+          <label><input type="radio" name="q2" value="no"> No</label>
+        </div>
+        <!-- Add more questions as needed -->
+        <!-- <input type="hidden" name="submitted" value="true"> Removed, not needed for JS handling -->
+        <div class="button-container"> <!-- Wrapper for centering -->
+            <button type="submit" class="compact-yellow-button">Submit Quiz</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Quiz Results Section (Initially Hidden, now inside content-container) -->
+    <div id="quizResults" style="display: none;">
+      <h2>Your Quiz Results</h2>
+      <p>Score: <span id="score"></span></p>
+      <p>Percentage: <span id="percentage"></span>%</p>
+      <p id="passFailMessage"></p>
+      <div class="button-container"> <!-- Wrapper for centering -->
+        <!-- Buttons will be dynamically added here by JavaScript -->
+        <!-- <button id="retakeQuizButton" class="compact-yellow-button retake-button">Retake Quiz</button> -->
+        <!-- The line above is removed as the button is now created dynamically -->
+      </div>
+    </div>
+  </div> <!-- Closing content-container -->
+
+  <footer class="footer-section">
+    <div class="footer-bottom">
+      © 2023 AutoLearn PH. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- PDF.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const takeQuizButton = document.getElementById('takeQuizButton');
+      const quizSection = document.getElementById('section2');
+      const quizForm = document.getElementById('quizForm');
+      const quizResultsSection = document.getElementById('quizResults');
+      const scoreDisplay = document.getElementById('score');
+      const percentageDisplay = document.getElementById('percentage');
+      const passFailMessageDisplay = document.getElementById('passFailMessage');
+      const actionButtonContainer = quizResultsSection.querySelector('.button-container'); // Get the button container
+      const pdfViewerWrapper = document.getElementById('pdfViewerWrapper');
+      const quizPageIntro = document.getElementById('quizPageIntro'); // Get the new wrapper
+
+      if (takeQuizButton && quizSection) {
+        takeQuizButton.addEventListener('click', function() {
+          quizSection.style.display = 'block'; // Show the quiz form
+          takeQuizButton.style.display = 'none'; // Optionally hide the "Take the Quiz" button
+          if (quizPageIntro) quizPageIntro.style.display = 'block'; // Show the main quiz intro
+          if (pdfViewerWrapper) pdfViewerWrapper.style.display = 'none'; // Hide the PDF viewer
+          quizSection.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
+
+      if (quizForm && quizResultsSection) {
+        quizForm.addEventListener('submit', function(event) {
+          event.preventDefault(); // Prevent default form submission
+
+          // Define correct answers (case-sensitive for text inputs)
+          const correctAnswers = {
+            q1: "4",
+            q2: "no"
+            // Add more correct answers here for other questions
+          };
+          const totalQuestions = Object.keys(correctAnswers).length;
+          let score = 0;
+
+          // Get user answers
+          const formData = new FormData(quizForm);
+          const userAnswers = {};
+          for (let [key, value] of formData.entries()) {
+            userAnswers[key] = value;
+          }
+
+          // Calculate score
+          if (userAnswers.q1 && userAnswers.q1.trim() === correctAnswers.q1) {
+            score++;
+          }
+          if (userAnswers.q2 === correctAnswers.q2) {
+            score++;
+          }
+          // Add more scoring logic here for other questions
+
+          const percentage = (score / totalQuestions) * 100;
+          const passingPercentage = 70; // Example: 70% to pass
+
+          // Display results
+          scoreDisplay.textContent = `${score} / ${totalQuestions}`;
+          percentageDisplay.textContent = percentage.toFixed(0);
+
+          actionButtonContainer.innerHTML = ''; // Clear any previous buttons
+
+          if (percentage >= passingPercentage) {
+            passFailMessageDisplay.textContent = "Congratulations! You passed!";
+            passFailMessageDisplay.className = 'pass';
+
+            const evalButton = document.createElement('a');
+            evalButton.href = "CourseEvaluation.html"; // Link to your evaluation page
+            evalButton.textContent = "Go to Course Evaluation";
+            evalButton.className = 'compact-yellow-button'; // Apply button styling
+            actionButtonContainer.appendChild(evalButton);
+
+          } else {
+            passFailMessageDisplay.textContent = "You did not pass this time. Please review the material.";
+            passFailMessageDisplay.className = 'fail';
+
+            const retakeButton = document.createElement('button');
+            retakeButton.id = 'retakeQuizButtonDynamic'; // Give it an ID if needed for other specific targeting
+            retakeButton.textContent = "Retake Quiz";
+            retakeButton.className = 'compact-yellow-button retake-button';
+            retakeButton.addEventListener('click', function() { // Add event listener directly
+              quizResultsSection.style.display = 'none'; // Hide results
+              if (pdfViewerWrapper) pdfViewerWrapper.style.display = 'block'; // Show PDF viewer again
+              if (quizPageIntro) quizPageIntro.style.display = 'none'; 
+              takeQuizButton.style.display = 'inline-block'; 
+              quizForm.reset(); 
+            });
+            actionButtonContainer.appendChild(retakeButton);
+          }
+
+          quizSection.style.display = 'none'; // Hide quiz form
+          if (quizPageIntro) quizPageIntro.style.display = 'none'; // Hide the main quiz intro when results are shown
+          quizResultsSection.style.display = 'block'; // Show results
+          quizResultsSection.scrollIntoView({ behavior: 'smooth', block: 'center' }); // Scroll to center the results in the viewport
+        });
+      }
+
+      // The retakeQuizButton event listener is now set up dynamically when the button is created.
+      // PDF Viewer Logic (adapted from lesson1.html)
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+
+      // IMPORTANT: Adjust this path if your PDF is located elsewhere relative to Untitled-1.html
+      // Assuming Untitled-1.html is in public/Course/Quiz/Lesson1/
+      // and lesson1.pdf is in public/Course/lesson/
+      const pdfUrl = '../lesson/lesson1.pdf'; 
+
+      const pdfCanvas = document.getElementById('pdf-canvas');
+      const prevButtonTop = document.getElementById('prev-page-top');
+      const nextButtonTop = document.getElementById('next-page-top');
+      const prevButtonBottom = document.getElementById('prev-page-bottom');
+      const nextButtonBottom = document.getElementById('next-page-bottom');
+      const pageNumDisplay = document.getElementById('page-num');
+      const pageCountDisplay = document.getElementById('page-count');
+      const pdfLoadingError = document.getElementById('pdf-loading-error');
+      const pdfControlsTop = document.getElementById('pdf-viewer-controls-top');
+      const pdfControlsBottom = document.getElementById('pdf-viewer-controls-bottom');
+      
+      if (pdfCanvas) { // Ensure canvas exists before trying to get context
+        const ctx = pdfCanvas.getContext('2d');
+        let pdfDoc = null;
+        let currentPageNum = 1;
+        let pageRendering = false;
+        let pageNumPending = null;
+        const scale = 1.5; // You can adjust this scale
+
+        function renderPage(num) {
+          pageRendering = true;
+          pdfDoc.getPage(num).then(function(page) {
+            const viewport = page.getViewport({ scale: scale });
+            pdfCanvas.height = viewport.height;
+            pdfCanvas.width = viewport.width;
+
+            const renderContext = { canvasContext: ctx, viewport: viewport };
+            const renderTask = page.render(renderContext);
+
+            renderTask.promise.then(function() {
+              pageRendering = false;
+              if (pageNumPending !== null) {
+                renderPage(pageNumPending);
+                pageNumPending = null;
+              }
+            });
+          });
+          pageNumDisplay.textContent = num;
+        }
+
+        function queueRenderPage(num) {
+          if (pageRendering) { pageNumPending = num; } else { renderPage(num); }
+        }
+
+        function onPrevPage() {
+          if (currentPageNum <= 1) return;
+          currentPageNum--;
+          queueRenderPage(currentPageNum);
+        }
+
+        function onNextPage() {
+          if (currentPageNum >= pdfDoc.numPages) return;
+          currentPageNum++;
+          queueRenderPage(currentPageNum);
+        }
+
+        prevButtonTop.addEventListener('click', onPrevPage);
+        nextButtonTop.addEventListener('click', onNextPage);
+        prevButtonBottom.addEventListener('click', onPrevPage);
+        nextButtonBottom.addEventListener('click', onNextPage);
+
+        pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) {
+          pdfDoc = pdfDoc_;
+          pdfControlsTop.style.display = 'block'; 
+          pdfControlsBottom.style.display = 'block';
+          pageCountDisplay.textContent = pdfDoc.numPages;
+          renderPage(currentPageNum);
+          pdfLoadingError.textContent = ''; 
+        }).catch(function(error) {
+          console.error('Error loading PDF: ' + error);
+          pdfLoadingError.textContent = 'Error loading PDF. Please ensure the file exists at the specified path and is a valid PDF. Check console for details.';
+          pdfCanvas.style.display = 'none';
+          pdfControlsTop.style.display = 'none';
+          pdfControlsBottom.style.display = 'none';
+        });
+      }
+    });
+  </script>
+</body>
+</html>
