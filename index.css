@@ -1,0 +1,113 @@
+        /* ===== SECTION 1: HERO (from Course.html) ===== */
+        .section-blue { /* This class was used for Section 1 in try1.html */
+          background: #b3c6e0;
+          color: #204080;
+          padding: 56px 0 48px 0;
+          text-align: center;
+        }
+        .section-blue .main-title { /* Style for potential title in this section */
+          font-size: 2.6em;
+          font-weight: 700;
+          margin-bottom: 18px;
+          margin-top: 32px;
+        }
+        .section-blue .subtitle { /* Style for potential subtitle in this section */
+          font-size: 1.2em;
+          font-weight: 400;
+          margin-bottom: 32px;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+          line-height: 1.5;
+        }
+        .start-btn { /* Style for potential button in this section (from try1.html hero) */
+          background: #FFD600;
+          color: #285197;
+          font-weight: 700;
+          padding: 16px 40px;
+          border: none;
+          border-radius: 8px;
+          font-size: 1.2em;
+          text-decoration: none;
+          margin-top: 24px;
+          display: inline-block;
+          transition: background 0.2s, color 0.2s;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+        .start-btn:hover {
+          background: #ffe066;
+          color: #204080;
+        }
+        /* ===== SECTION 1: HERO (from Course.html) ===== */
+        .section-blue { /* This class was used for Section 1 in try1.html */
+          background: #b3c6e0;
+          color: #204080;
+          padding: 56px 0 48px 0;
+          text-align: center;
+        }
+        .section-blue .main-title { /* Style for potential title in this section */
+          font-size: 2.6em;
+          font-weight: 700;
+          margin-bottom: 18px;
+          margin-top: 32px;
+        }
+        .section-blue .subtitle { /* Style for potential subtitle in this section */
+          font-size: 1.2em;
+          font-weight: 400;
+          margin-bottom: 32px;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+          line-height: 1.5;
+        }
+        .start-btn { /* Style for potential button in this section (from try1.html hero) */
+          background: #FFD600;
+          color: #285197;   
+          font-weight: 700;
+          padding: 16px 40px;
+          border: none;
+          border-radius: 8px;
+          font-size: 1.2em;
+          text-decoration: none;
+          margin-top: 24px;
+          display: inline-block;
+          transition: background 0.2s, color 0.2s;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+        .start-btn:hover {
+          background: #ffe066;
+          color: #204080;
+        }
+        #pdf-canvas {
+            border: 1px solid #ccc; 
+            max-width: 100%; /* Ensure canvas is responsive */
+            margin: 10px auto; /* Add some margin around the canvas */
+        }
+        /* ... other styles ... */
+        .pdf-navigation-controls {
+            margin-bottom: 10px; /* Space below top controls */
+            margin-top: 10px; /* Space above bottom controls */
+            text-align: center;
+            display: none; /* Hidden by default, shown by JS */
+        }
+        .pdf-navigation-controls button {
+            padding: 8px 16px;
+            margin: 0 5px;
+            cursor: pointer;
+            border: 1px solid #007bff;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .pdf-navigation-controls button:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+        .pdf-navigation-controls button:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+            background-color: #e9ecef;
+            border-color: #ced4da;
+            color: #6c757d;
+        }
+        .pdf-page-info { display: inline-block; margin: 0 15px; font-size: 0.95em; color: #495057;}
