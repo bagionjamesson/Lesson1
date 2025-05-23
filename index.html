@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="logo.png"> <!-- Favicon link -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Course: Comprehensive Web Development</title>
     <style>
@@ -390,20 +391,10 @@
                 </div>
             </section>
 
-            <!-- Take the Quiz Button -->
-            <div class="take-quiz-button-container">
-                <a href="../../Quiz/Lesson1/Quiz1.html" class="take-quiz-btn">Take the Quiz</a>
-            </div> 
-                <canvas id="pdf-canvas" style="display: none;"></canvas>
-                <div class="pdf-navigation-controls" id="pdf-controls-bottom">
-                    <button id="prev-page-bottom">Previous</button>
-                    <span class="pdf-page-info">Page <span id="page-num-bottom">0</span> / <span id="page-count-bottom">0</span></span>
-                    <button id="next-page-bottom">Next</button>
-                </div>
-
             <!-- Future course content (modules, lessons, etc.) would go here -->
         </main>
 
+        <!-- Sidebar with Course Outline -->
         <aside class="course-sidebar">
             <h3>Course Outline</h3>
             <div class="course-units">
@@ -415,10 +406,14 @@
                             <!-- Introduction to the concept, goals, and types of servicing. -->
                         </li>
                         <li class="lesson-item">
-                            <a href="javascript:void(0);" class="lesson-link" data-pdf-src="pdfs/lesson2.pdf">Lesson 2: Scope and Importance of Automotive Servicing</a>
+                            <a href="javascript:void(0);" class="lesson-link" data-pdf-src="pdfs/unit1-lesson2.pdf"
+                               data-is-last-in-unit="true" data-quiz-target="#quiz-unit-1">Lesson 2: Scope and Importance of Automotive Servicing</a>
                             <!-- Why servicing is essential for vehicle safety, efficiency, and longevity. -->
                         </li>
                     </ul>
+                    <div class="take-quiz-button-container">
+                        <a href="../../Quiz/Unit1/Quiz1.html" id="quiz-unit-1" class="take-quiz-btn quiz-link" style="display: none;">Take Quiz for Unit 1</a>
+                    </div>
                 </div>
                 <div class="unit">
                     <h4>Unit 2: Core Components in Servicing</h4>
@@ -428,10 +423,14 @@
                             <!-- Understanding engine parts and transmission systems. -->
                         </li>
                         <li class="lesson-item">
-                            <a href="javascript:void(0);" class="lesson-link" data-pdf-src="pdfs/lesson4.pdf">Lesson 2: Electrical Systems Overview</a>
+                            <a href="javascript:void(0);" class="lesson-link" data-pdf-src="pdfs/unit2-lesson2.pdf"
+                               data-is-last-in-unit="true" data-quiz-target="#quiz-unit-2">Lesson 2: Electrical Systems Overview</a>
                             <!-- Basic electrical components and their role. -->
                         </li>
                     </ul>
+                    <div class="take-quiz-button-container">
+                        <a href="../../Quiz/Unit2/Quiz2.html" id="quiz-unit-2" class="take-quiz-btn quiz-link" style="display: none;">Take Quiz for Unit 2</a>
+                    </div>
                 </div>
                 <div class="unit">
                     <h4>Unit 3: Servicing Procedures and Safety</h4>
@@ -444,7 +443,7 @@
                             <a href="javascript:void(0);" class="lesson-link" data-pdf-src="pdfs/lesson6.pdf">Lesson 2: Safety Precautions During Servicing</a>
                             <!-- Important safety tips and protocols. -->
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-                <script src="index.js"></script> 
+                <script src="professional_course_page.js"></script> 
 
                             <!--For connecting the java script file-->
 
