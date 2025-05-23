@@ -1,428 +1,457 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Lesson 1</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="logo.png"> <!-- Adjusted path -->
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Montserrat', Arial, sans-serif;
-      background: #f5f7fa;
-      color: #204080;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    /* Basic Navbar Style - ideally from shared CSS */
-    .navbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #285197;
-      padding: 0 48px;
-      height: 70px;
-    }
-    .navbar-left { display: flex; align-items: center; }
-    .navbar-logo { width: 2em; height: 2em; margin-right: 14px; object-fit: cover; vertical-align: middle; }
-    .navbar-title-link { display: flex; align-items: center; text-decoration: none; }
-    .navbar-title { color: #fff; font-size: 1.6em; font-weight: 700; letter-spacing: 0.5px; display: flex; align-items: center; }
-    .navbar-title .auto { color: #fff; }
-    .navbar-title .learn { color: #FFD600; margin-left: 2px; }
-    .navbar-title .ph { color: #fff; font-size: 1em; font-weight: 500; margin-left: 4px; }
-    .navbar-menu { display: flex; align-items: center; list-style: none; margin: 0; padding: 0; }
-    .navbar-menu li { margin-left: 32px; }
-    .navbar-menu li a { color: #fff; text-decoration: none; font-size: 1em; font-weight: 600; padding: 8px 18px; border-radius: 6px; transition: background 0.2s, color 0.2s; }
-    .navbar-menu li a:hover, .navbar-menu li a.active { background: #4666a3; }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Course: Comprehensive Web Development</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
 
-    .content-container {
-      padding: 20px; /* Adjusted padding, can be fine-tuned */
-      text-align: center;
-      flex-grow: 1; /* Allows this container to grow and fill space between header and footer */
-      display: flex; /* Enable Flexbox */
-      flex-direction: column; /* Stack children vertically */
-      justify-content: center; /* Vertically center content within this container */
-    }
-    .button-container { /* Added for centering buttons */
-      text-align: center;
-      margin-top: 20px;
-      margin-bottom: 20px;
-    }
-    .compact-yellow-button { /* New button style */
-      display: inline-block;
-      background-color: #f4c100;
-      color: #fff; /* Changed text color to white */
-      font-weight: bold;
-      padding: 10px 25px;
-      border: none;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 1.1em;
-      cursor: pointer;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-      transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    }
-    .compact-yellow-button:hover {
-      background-color: #e0b000;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-    }
+        .course-page-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 35px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
 
-    #section2 { /* This is our target quiz form section */
-      margin-top: 30px;
-      padding: 20px;
-      border: 1px solid #ddd;
-      background-color: #ffffff;
-      border-radius: 8px;
-      box-shadow: 0 2px 12px rgba(40,81,151,0.13);
-      text-align: left;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    #section2 h2 { text-align: center; margin-top: 0;}
-    .form-group { margin-bottom: 15px; }
-    .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
-    .form-group input[type="text"], .form-group input[type="radio"] { margin-right: 5px; }
+        /* Breadcrumbs */
+        .breadcrumbs {
+            margin-bottom: 30px;
+            font-size: 0.9em;
+            color: #6c757d;
+        }
 
-    /* Quiz Results Styles */
-    #quizResults {
-      margin-top: 40px; /* Add some space above the results when they appear */
-      padding: 25px;
-      border: 1px solid #ddd;
-      background-color: #ffffff;
-      border-radius: 8px;
-      box-shadow: 0 2px 12px rgba(40,81,151,0.13);
-      text-align: center;
-      max-width: 600px;
-      width: 90%; /* Responsive width, can be adjusted or removed if max-width is sufficient */
-      margin-left: auto;  /* Center the block horizontally */
-      margin-right: auto; /* Center the block horizontally */
-      /* Removed fixed positioning properties: position, top, left, transform, z-index */
-    }
-    #quizResults h2 { margin-top: 0; color: #285197; }
-    #quizResults p { font-size: 1.1em; margin-bottom: 10px; }
-    #score, #percentage { font-weight: bold; font-size: 1.3em; }
-    #passFailMessage.pass { color: #28a745; font-weight: bold; font-size: 1.2em; }
-    #passFailMessage.fail { color: #dc3545; font-weight: bold; font-size: 1.2em; }
-    .retake-button { /* Can reuse .action-button or define separately */
-        margin-top: 25px;
-        /* Styles inherited from .action-button if class is added */
-    }
+        .breadcrumbs a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
 
-    /* PDF Viewer Styles (adapted from lesson1.html) */
-    .pdf-viewer-wrapper {
-      background: #fff;
-      border-radius: 18px;
-      min-height: 380px;
-      max-width: 900px;
-      margin: 20px auto 30px auto; /* Added margin bottom */
-      box-shadow: 0 4px 24px rgba(40,81,151,0.10);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .pdf-controls-container {
-      text-align: center;
-      width: 100%;
-    }
-    .pdf-controls-container.top { margin-bottom: 15px; }
-    .pdf-controls-container.bottom { margin-top: 15px; }
-    .pdf-nav-button {
-      padding: 8px 16px;
-      font-size: 1em;
-      cursor: pointer;
-      background-color: #e0e0e0; /* Basic styling for buttons */
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    .pdf-page-info { margin: 0 10px; font-size: 1em; }
+        .breadcrumbs a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
 
-    /* Basic Footer Style - ideally from shared CSS */
-    .footer-section {
-      background: #204080;
-      color: #ffffff;
-      padding: 30px 0 20px 0;
-      text-align: center;
-    }
-    .footer-bottom { font-size: 0.98em; }
-  </style>
+        .breadcrumbs span {
+            color: #495057;
+        }
+
+        /* Course Header Area */
+        .course-header-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .course-header-area h1 {
+            font-size: 2.4em;
+            color: #2c3e50;
+            margin: 0;
+            font-weight: 600;
+            flex-grow: 1;
+        }
+
+        /* Home Link in Header (Styled like progress indicator) */
+        .header-home-link-styled {
+            background-color: #e9ecef;      /* Original progress-indicator background */
+            color: #007bff;                 /* Link blue color for text */
+            padding: 10px 18px;            /* Original progress-indicator padding */
+            border-radius: 25px;           /* Original progress-indicator border-radius (pill shape) */
+            font-size: 0.95em;             /* Original progress-indicator font-size */
+            font-weight: 500;              /* Original progress-indicator font-weight */
+            white-space: nowrap;           /* Original progress-indicator white-space */
+            text-decoration: none;         /* Remove underline for button-like appearance */
+            margin-top: 5px;
+            display: inline-block;         /* Allows padding and behaves like a block element */
+            transition: background-color 0.2s ease, color 0.2s ease; /* Smooth transition */
+            border: 1px solid #ced4da;     /* Optional: a light border */
+        }
+
+        .header-home-link-styled:hover {
+            background-color: #d0d3d6;      /* Slightly darker background on hover */
+            color: #0056b3;                 /* Darker link color on hover */
+            text-decoration: none;         /* Ensure no underline on hover for button look */
+        }
+
+        /* PDF Viewer Placeholder Styles */
+        .pdf-viewer-placeholder {
+            background-color: #fff; /* Or a light grey like #f8f9fa */
+            border: 1px solid #dee2e6; /* Subtle border */
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 35px;
+            text-align: center;
+            min-height: 500px; /* Adjust as needed for PDF display */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .pdf-viewer-placeholder h2 {
+            color: #495057;
+            margin-top: 0;
+        }
+         #pdf-canvas {
+            border: 1px solid #ccc; 
+            max-width: 100%; /* Ensure canvas is responsive */
+            margin: 10px auto; /* Add some margin around the canvas */
+            /* display: none; -- Initially hidden by JS */
+        }
+        #pdf-status-message { font-size: 1em; color: #6c757d; margin-bottom: 15px;}
+        .pdf-navigation-controls {
+            margin-bottom: 10px; /* Space below top controls */
+            margin-top: 10px; /* Space above bottom controls */
+            text-align: center;
+            display: none; /* Hidden by default, shown by JS */
+        }
+        .pdf-navigation-controls button {
+            padding: 8px 16px;
+            margin: 0 5px;
+            cursor: pointer;
+            border: 1px solid #007bff;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .pdf-navigation-controls button:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+        .pdf-navigation-controls button:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+            background-color: #e9ecef;
+            border-color: #ced4da;
+            color: #6c757d;
+        }
+        .pdf-page-info { display: inline-block; margin: 0 15px; font-size: 0.95em; color: #495057;}
+      
+        /* Take Quiz Button Styles */
+        .take-quiz-button-container {
+            text-align: center; /* Center the button */
+            margin-top: 30px; /* Space above the button */
+            margin-bottom: 20px; /* Space below the button */
+        }
+        .take-quiz-btn {
+            background-color: #FFD600; /* Yellow background */
+            color: #285197; /* Dark blue text */
+            border: none;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-size: 1.05em;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+        .take-quiz-btn:hover {
+            background-color: #ffe066; /* Lighter yellow on hover */
+            transform: translateY(-1px);
+        }
+
+        /* Main Layout with Sidebar */
+        .main-course-content {
+            flex-grow: 1;
+            min-width: 0;
+        }
+
+        .course-sidebar {
+            width: 300px;
+            flex-shrink: 0;
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 20px;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+
+        .course-sidebar h3 {
+            font-size: 1.3em;
+            color: #343a40;
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .course-units .unit {
+            margin-bottom: 25px;
+        }
+
+        .course-units .unit:last-child {
+            margin-bottom: 0;
+        }
+
+        .course-units .unit h4 {
+            font-size: 1.05em;
+            color: #495057;
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .lessons-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .lesson-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 5px;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .lesson-item:last-child {
+            border-bottom: none;
+        }
+
+        .lesson-item .lesson-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .lesson-item a, .lesson-item > span {
+            color: #212529;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            flex-grow: 1;
+        }
+
+        .lesson-item a:hover {
+            color: #0056b3;
+        }
+
+        .lesson-item.lesson-completed .lesson-icon.icon-checkmark {
+            fill: #28a745;
+        }
+        .lesson-item.lesson-completed a {
+            color: #1e7e34;
+        }
+        .lesson-item.lesson-completed a:hover {
+            color: #155724;
+        }
+
+        .lesson-item.lesson-current {
+            background-color: #e0efff;
+            border-left: 4px solid #007bff;
+            padding-left: 10px;
+            margin-left: -14px;
+            border-radius: 0 4px 4px 0;
+        }
+        .lesson-item.lesson-current a,
+        .lesson-item.lesson-current .lesson-icon.icon-arrow {
+            font-weight: bold;
+            color: #0056b3;
+        }
+        .lesson-item.lesson-current .lesson-icon.icon-arrow {
+            fill: #007bff;
+        }
+
+        .lesson-item.lesson-locked {
+            opacity: 0.65;
+        }
+        .lesson-item.lesson-locked .lesson-icon.icon-lock {
+            fill: #6c757d;
+        }
+        .lesson-item.lesson-locked > span {
+            color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        /* Style for the active lesson in the sidebar */
+        .lessons-list .lesson-item a.active-lesson {
+            color: #28a745; /* Green color for active link font */
+            font-weight: bold; /* Make active link bold */
+            background-color: #e0efff; /* Light blue background for active item */
+            display: block; /* Ensure background color spans if padding is on <a> */
+            margin: -10px -5px; /* Adjust to fill li padding */
+            padding: 10px 5px; /* Restore padding */
+        }
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .course-page-container {
+                flex-direction: column;
+            }
+            .course-sidebar {
+                width: 100%;
+                margin-top: 30px;
+                position: static;
+                max-height: none;
+                overflow-y: visible;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-course-content .course-page-container {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            .main-course-content .course-header-area {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .main-course-content .course-header-area h1 {
+                font-size: 2em;
+                margin-bottom: 15px;
+            }
+            .main-course-content .progress-indicator {
+                align-self: flex-start;
+            }
+            .main-course-content .welcome-section {
+                padding: 25px;
+            }
+            .main-course-content .welcome-section h2 {
+                font-size: 1.7em;
+            }
+            .main-course-content .play-video-button {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            .main-course-content .course-page-container {
+                padding: 20px;
+            }
+            .main-course-content .course-header-area h1 {
+                font-size: 1.8em;
+            }
+            .main-course-content .welcome-section h2 {
+                font-size: 1.5em;
+            }
+            .main-course-content .play-video-button {
+                font-size: 1em;
+            }
+        }
+
+    </style>
 </head>
 <body>
-  <nav class="navbar">
-    <div class="navbar-left">
-      <a href="https://bagionjamesson.github.io/menu/" class="navbar-title-link">
-        <img src="logo.png" alt="Logo" class="navbar-logo">
-        <div class="navbar-title">
-          <span class="auto">Auto</span><span class="learn">Learn</span> <span class="ph">PH</span>
-        </div>
-      </a>
+    <!-- Section 2: Main Content (White Background) -->
+    <div class="course-page-container">
+        <main class="main-course-content">
+            <!-- Breadcrumb Navigation -->
+            <nav class="breadcrumbs">
+                <a href="https://bagionjamesson.github.io/menu/">Dashboard</a> &gt;
+                <a href="https://bagionjamesson.github.io/Course/">My Courses</a> &gt;
+                <span>Comprehensive Web Development</span>
+            </nav>
+            <!-- Course Header: Title and Progress -->
+            <header class="course-header-area">
+                <h1>Comprehensive Web Development</h1>
+                <a href="../menu.html" class="header-home-link-styled">🏠</a> <!-- Path to menu.html, assuming it's one level up -->
+            </header>
+
+            <!-- PDF Viewer Placeholder -->
+             <section class="pdf-viewer-placeholder" id="pdf-viewer-area">
+                <div class="pdf-navigation-controls" id="pdf-controls-top">
+                    <button id="prev-page-top">Previous</button>
+                    <span class="pdf-page-info">Page <span id="page-num-top">0</span> / <span id="page-count-top">0</span></span>
+                    <button id="next-page-top">Next</button>
+                </div>
+                <div id="pdf-status-message">Select a lesson from the outline to view its PDF.</div>
+                <canvas id="pdf-canvas" style="display: none;"></canvas>
+                <div class="pdf-navigation-controls" id="pdf-controls-bottom">
+                    <button id="prev-page-bottom">Previous</button>
+                    <span class="pdf-page-info">Page <span id="page-num-bottom">0</span> / <span id="page-count-bottom">0</span></span>
+                    <button id="next-page-bottom">Next</button>
+                </div>
+            </section>
+
+            <!-- Take the Quiz Button -->
+            <div class="take-quiz-button-container">
+                <a href="../../Quiz/Lesson1/Quiz1.html" class="take-quiz-btn">Take the Quiz</a>
+            </div> 
+                <canvas id="pdf-canvas" style="display: none;"></canvas>
+                <div class="pdf-navigation-controls" id="pdf-controls-bottom">
+                    <button id="prev-page-bottom">Previous</button>
+                    <span class="pdf-page-info">Page <span id="page-num-bottom">0</span> / <span id="page-count-bottom">0</span></span>
+                    <button id="next-page-bottom">Next</button>
+                </div>
+
+            <!-- Future course content (modules, lessons, etc.) would go here -->
+        </main>
+
+        <aside class="course-sidebar">
+            <h3>Course Outline</h3>
+            <div class="course-units">
+                <div class="unit">
+                    <h4>Unit 1: Basics of Automotive Servicing</h4>
+                    <ul class="lessons-list">
+                        <li class="lesson-item">
+                            <a href="javascript:void(0);" class="lesson-link" data-pdf-src="../lesson1.pdf">Lesson 1: What is Automotive Servicing?</a>
+                            <!-- Introduction to the concept, goals, and types of servicing. -->
+                        </li>
+                        <li class="lesson-item">
+                            <a href="javascript:void(0);" class="lesson-link" data-pdf-src="pdfs/lesson2.pdf">Lesson 2: Scope and Importance of Automotive Servicing</a>
+                            <!-- Why servicing is essential for vehicle safety, efficiency, and longevity. -->
+                        </li>
+                    </ul>
+                </div>
+                <div class="unit">
+                    <h4>Unit 2: Core Components in Servicing</h4>
+                    <ul class="lessons-list">
+                        <li class="lesson-item">
+                            <a href="javascript:void(0);" class="lesson-link" data-pdf-src="pdfs/lesson3.pdf">Lesson 1: Engine and Transmission Basics</a>
+                            <!-- Understanding engine parts and transmission systems. -->
+                        </li>
+                        <li class="lesson-item">
+                            <a href="javascript:void(0);" class="lesson-link" data-pdf-src="pdfs/lesson4.pdf">Lesson 2: Electrical Systems Overview</a>
+                            <!-- Basic electrical components and their role. -->
+                        </li>
+                    </ul>
+                </div>
+                <div class="unit">
+                    <h4>Unit 3: Servicing Procedures and Safety</h4>
+                    <ul class="lessons-list">
+                        <li class="lesson-item">
+                            <a href="javascript:void(0);" class="lesson-link" data-pdf-src="pdfs/lesson5.pdf">Lesson 1: Preventive Maintenance Practices</a>
+                            <!-- Routine checks and maintenance tasks. -->
+                        </li>
+                        <li class="lesson-item">
+                            <a href="javascript:void(0);" class="lesson-link" data-pdf-src="pdfs/lesson6.pdf">Lesson 2: Safety Precautions During Servicing</a>
+                            <!-- Important safety tips and protocols. -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+                <script src="professional_course_page.js"></script> 
+
+                            <!--For connecting the java script file-->
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
     </div>
-    <ul class="navbar-menu">
-      <li><a href="../../menu.html">Home</a></li>
-      <li><a href="../lesson/lesson1.html" class="active">Lessons</a></li>
-      <li><a href="#">Learning Materials</a></li>
-      <li><a href="#">About Us</a></li>
-    </ul>
-  </nav>
-
-  <div class="content-container">
-    <!-- PDF Viewer Section -->
-    <div id="pdfViewerWrapper" class="pdf-viewer-wrapper">
-      <h2 style="color: #285197; margin-bottom: 20px;">Lesson Material</h2>
-      <!-- Top PDF Controls -->
-      <div id="pdf-viewer-controls-top" class="pdf-controls-container top" style="display:none;">
-        <button id="prev-page-top" class="pdf-nav-button">Previous</button>
-        <span class="pdf-page-info">
-          Page <span id="page-num">0</span> / <span id="page-count">0</span>
-        </span>
-        <button id="next-page-top" class="pdf-nav-button">Next</button>
-      </div>
-      <canvas id="pdf-canvas" style="border: 1px solid #ccc; max-width: 100%; display: block; margin: 0 auto;"></canvas>
-      <div id="pdf-loading-error" style="color: red; margin-top: 10px; text-align: center;"></div>
-      <!-- Bottom PDF Controls -->
-      <div id="pdf-viewer-controls-bottom" class="pdf-controls-container bottom" style="display:none;">
-        <button id="prev-page-bottom" class="pdf-nav-button">Previous</button>
-        <button id="next-page-bottom" class="pdf-nav-button">Next</button>
-      </div>
-    </div>
-
-    <div id="quizPageIntro" style="display: none;"> <!-- Wrapper for the main quiz intro, initially hidden -->
-      <h1>Lesson 1 Quiz</h1>
-      <p>Click the button below to start the quiz.</p>
-    </div>
-    <div class="button-container"> <!-- Wrapper for centering -->
-      <button id="takeQuizButton" class="compact-yellow-button">Take the Quiz</button>
-    </div>
-
-    <div id="section2" style="display: none;">
-      <h2>Quiz Questions</h2>
-      <form id="quizForm"> <!-- Removed action and method -->
-        <div class="form-group">
-          <label for="q1">Question 1: What is 2 + 2?</label>
-          <input type="text" id="q1" name="q1" required>
-        </div>
-        <div class="form-group">
-          <p>Question 2: Is HTML a programming language?</p>
-          <label><input type="radio" name="q2" value="yes" required> Yes</label>
-          <label><input type="radio" name="q2" value="no"> No</label>
-        </div>
-        <!-- Add more questions as needed -->
-        <!-- <input type="hidden" name="submitted" value="true"> Removed, not needed for JS handling -->
-        <div class="button-container"> <!-- Wrapper for centering -->
-            <button type="submit" class="compact-yellow-button">Submit Quiz</button>
-        </div>
-      </form>
-    </div>
-
-    <!-- Quiz Results Section (Initially Hidden, now inside content-container) -->
-    <div id="quizResults" style="display: none;">
-      <h2>Your Quiz Results</h2>
-      <p>Score: <span id="score"></span></p>
-      <p>Percentage: <span id="percentage"></span>%</p>
-      <p id="passFailMessage"></p>
-      <div class="button-container"> <!-- Wrapper for centering -->
-        <!-- Buttons will be dynamically added here by JavaScript -->
-        <!-- <button id="retakeQuizButton" class="compact-yellow-button retake-button">Retake Quiz</button> -->
-        <!-- The line above is removed as the button is now created dynamically -->
-      </div>
-    </div>
-  </div> <!-- Closing content-container -->
-
-  <footer class="footer-section">
-    <div class="footer-bottom">
-      © 2023 AutoLearn PH. All rights reserved.
-    </div>
-  </footer>
-
-  <!-- PDF.js Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const takeQuizButton = document.getElementById('takeQuizButton');
-      const quizSection = document.getElementById('section2');
-      const quizForm = document.getElementById('quizForm');
-      const quizResultsSection = document.getElementById('quizResults');
-      const scoreDisplay = document.getElementById('score');
-      const percentageDisplay = document.getElementById('percentage');
-      const passFailMessageDisplay = document.getElementById('passFailMessage');
-      const actionButtonContainer = quizResultsSection.querySelector('.button-container'); // Get the button container
-      const pdfViewerWrapper = document.getElementById('pdfViewerWrapper');
-      const quizPageIntro = document.getElementById('quizPageIntro'); // Get the new wrapper
-
-      if (takeQuizButton && quizSection) {
-        takeQuizButton.addEventListener('click', function() {
-          quizSection.style.display = 'block'; // Show the quiz form
-          takeQuizButton.style.display = 'none'; // Optionally hide the "Take the Quiz" button
-          if (quizPageIntro) quizPageIntro.style.display = 'block'; // Show the main quiz intro
-          if (pdfViewerWrapper) pdfViewerWrapper.style.display = 'none'; // Hide the PDF viewer
-          quizSection.scrollIntoView({ behavior: 'smooth' });
-        });
-      }
-
-      if (quizForm && quizResultsSection) {
-        quizForm.addEventListener('submit', function(event) {
-          event.preventDefault(); // Prevent default form submission
-
-          // Define correct answers (case-sensitive for text inputs)
-          const correctAnswers = {
-            q1: "4",
-            q2: "no"
-            // Add more correct answers here for other questions
-          };
-          const totalQuestions = Object.keys(correctAnswers).length;
-          let score = 0;
-
-          // Get user answers
-          const formData = new FormData(quizForm);
-          const userAnswers = {};
-          for (let [key, value] of formData.entries()) {
-            userAnswers[key] = value;
-          }
-
-          // Calculate score
-          if (userAnswers.q1 && userAnswers.q1.trim() === correctAnswers.q1) {
-            score++;
-          }
-          if (userAnswers.q2 === correctAnswers.q2) {
-            score++;
-          }
-          // Add more scoring logic here for other questions
-
-          const percentage = (score / totalQuestions) * 100;
-          const passingPercentage = 70; // Example: 70% to pass
-
-          // Display results
-          scoreDisplay.textContent = `${score} / ${totalQuestions}`;
-          percentageDisplay.textContent = percentage.toFixed(0);
-
-          actionButtonContainer.innerHTML = ''; // Clear any previous buttons
-
-          if (percentage >= passingPercentage) {
-            passFailMessageDisplay.textContent = "Congratulations! You passed!";
-            passFailMessageDisplay.className = 'pass';
-
-            const evalButton = document.createElement('a');
-            evalButton.href = "https://forms.gle/ga1mMfeAbeUY32Fe7"; // Link to your evaluation page
-            evalButton.textContent = "Go to Course Evaluation";
-            evalButton.className = 'compact-yellow-button'; // Apply button styling
-            actionButtonContainer.appendChild(evalButton);
-
-          } else {
-            passFailMessageDisplay.textContent = "You did not pass this time. Please review the material.";
-            passFailMessageDisplay.className = 'fail';
-
-            const retakeButton = document.createElement('button');
-            retakeButton.id = 'retakeQuizButtonDynamic'; // Give it an ID if needed for other specific targeting
-            retakeButton.textContent = "Retake Quiz";
-            retakeButton.className = 'compact-yellow-button retake-button';
-            retakeButton.addEventListener('click', function() { // Add event listener directly
-              quizResultsSection.style.display = 'none'; // Hide results
-              if (pdfViewerWrapper) pdfViewerWrapper.style.display = 'block'; // Show PDF viewer again
-              if (quizPageIntro) quizPageIntro.style.display = 'none'; 
-              takeQuizButton.style.display = 'inline-block'; 
-              quizForm.reset(); 
-            });
-            actionButtonContainer.appendChild(retakeButton);
-          }
-
-          quizSection.style.display = 'none'; // Hide quiz form
-          if (quizPageIntro) quizPageIntro.style.display = 'none'; // Hide the main quiz intro when results are shown
-          quizResultsSection.style.display = 'block'; // Show results
-          quizResultsSection.scrollIntoView({ behavior: 'smooth', block: 'center' }); // Scroll to center the results in the viewport
-        });
-      }
-
-      // The retakeQuizButton event listener is now set up dynamically when the button is created.
-      // PDF Viewer Logic (adapted from lesson1.html)
-      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
-
-      // IMPORTANT: Adjust this path if your PDF is located elsewhere relative to Untitled-1.html
-      // Assuming Untitled-1.html is in public/Course/Quiz/Lesson1/
-      // and lesson1.pdf is in public/Course/lesson/
-      const pdfUrl = 'lesson1.pdf'; 
-
-      const pdfCanvas = document.getElementById('pdf-canvas');
-      const prevButtonTop = document.getElementById('prev-page-top');
-      const nextButtonTop = document.getElementById('next-page-top');
-      const prevButtonBottom = document.getElementById('prev-page-bottom');
-      const nextButtonBottom = document.getElementById('next-page-bottom');
-      const pageNumDisplay = document.getElementById('page-num');
-      const pageCountDisplay = document.getElementById('page-count');
-      const pdfLoadingError = document.getElementById('pdf-loading-error');
-      const pdfControlsTop = document.getElementById('pdf-viewer-controls-top');
-      const pdfControlsBottom = document.getElementById('pdf-viewer-controls-bottom');
-      
-      if (pdfCanvas) { // Ensure canvas exists before trying to get context
-        const ctx = pdfCanvas.getContext('2d');
-        let pdfDoc = null;
-        let currentPageNum = 1;
-        let pageRendering = false;
-        let pageNumPending = null;
-        const scale = 1.5; // You can adjust this scale
-
-        function renderPage(num) {
-          pageRendering = true;
-          pdfDoc.getPage(num).then(function(page) {
-            const viewport = page.getViewport({ scale: scale });
-            pdfCanvas.height = viewport.height;
-            pdfCanvas.width = viewport.width;
-
-            const renderContext = { canvasContext: ctx, viewport: viewport };
-            const renderTask = page.render(renderContext);
-
-            renderTask.promise.then(function() {
-              pageRendering = false;
-              if (pageNumPending !== null) {
-                renderPage(pageNumPending);
-                pageNumPending = null;
-              }
-            });
-          });
-          pageNumDisplay.textContent = num;
-        }
-
-        function queueRenderPage(num) {
-          if (pageRendering) { pageNumPending = num; } else { renderPage(num); }
-        }
-
-        function onPrevPage() {
-          if (currentPageNum <= 1) return;
-          currentPageNum--;
-          queueRenderPage(currentPageNum);
-        }
-
-        function onNextPage() {
-          if (currentPageNum >= pdfDoc.numPages) return;
-          currentPageNum++;
-          queueRenderPage(currentPageNum);
-        }
-
-        prevButtonTop.addEventListener('click', onPrevPage);
-        nextButtonTop.addEventListener('click', onNextPage);
-        prevButtonBottom.addEventListener('click', onPrevPage);
-        nextButtonBottom.addEventListener('click', onNextPage);
-
-        pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) {
-          pdfDoc = pdfDoc_;
-          pdfControlsTop.style.display = 'block'; 
-          pdfControlsBottom.style.display = 'block';
-          pageCountDisplay.textContent = pdfDoc.numPages;
-          renderPage(currentPageNum);
-          pdfLoadingError.textContent = ''; 
-        }).catch(function(error) {
-          console.error('Error loading PDF: ' + error);
-          pdfLoadingError.textContent = 'Error loading PDF. Please ensure the file exists at the specified path and is a valid PDF. Check console for details.';
-          pdfCanvas.style.display = 'none';
-          pdfControlsTop.style.display = 'none';
-          pdfControlsBottom.style.display = 'none';
-        });
-      }
-    });
-  </script>
 </body>
-</html>
