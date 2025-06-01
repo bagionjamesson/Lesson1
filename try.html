@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AutoLearn PH</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    .navbar {
+      background-color: #1a1a1a;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .navbar .logo {
+      color: #fff;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+      padding: 0;
+      margin: 0;
+    }
+
+    .navbar ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .navbar ul li a:hover {
+      color: #ffc107;
+    }
+
+    .main-section {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 40px 20px;
+      gap: 40px;
+      background-color: #ffffff;
+    }
+
+    .pdf-viewer {
+      flex: 1 1 60%;
+    }
+
+    .course-outline {
+      flex: 1 1 35%;
+    }
+
+    .course-outline h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .course-outline ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .course-outline li {
+      margin-bottom: 10px;
+    }
+
+    .course-outline a {
+      text-decoration: none;
+      color: #007bff;
+      font-size: 15px;
+    }
+
+    .course-outline a.active-lesson {
+      font-weight: bold;
+      color: #ffc107;
+    }
+
+    #pdf-controls-top, #pdf-controls-bottom {
+      margin-bottom: 10px;
+      display: none;
+    }
+
+    canvas {
+      border: 1px solid #ccc;
+      width: 100%;
+      display: none;
+    }
+
+    #pdf-status-message {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .footer {
+      background-color: #1a1a1a;
+      color: #ffffff;
+      padding: 40px 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+    }
+
+    .footer h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .footer p,
+    .footer a,
+    .footer li {
+      font-size: 14px;
+      color: #cccccc;
+      text-decoration: none;
+      line-height: 1.8;
+    }
+
+    .footer a:hover {
+      color: #ffc107;
+    }
+
+    .footer ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    @media (max-width: 768px) {
+      .main-section {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo">AutoLearn PH</div>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Modules</a></li>
+      <li><a href="#">Learning Materials</a></li>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+
+  <section class="main-section">
+    <!-- PDF Viewer -->
+    <div class="pdf-viewer">
+      <div id="pdf-controls-top">
+        <button id="prev-page-top">Previous</button>
+        <span>Page <span id="page-num-top">1</span> of <span id="page-count-top">--</span></span>
+        <button id="next-page-top">Next</button>
+      </div>
+      <p id="pdf-status-message">Select a lesson to view the PDF.</p>
+      <canvas id="pdf-canvas"></canvas>
+      <div id="pdf-controls-bottom">
+        <button id="prev-page-bottom">Previous</button>
+        <span>Page <span id="page-num-bottom">1</span> of <span id="page-count-bottom">--</span></span>
+        <button id="next-page-bottom">Next</button>
+      </div>
+    </div>
+
+    <!-- Course Outline -->
+    <div class="course-outline">
+      <h2>Course Outline</h2>
+      <ul class="course-sidebar">
+        <li><a href="#" class="lesson-link" data-pdf-src="lesson1.pdf">Lesson 1: Introduction</a></li>
+        <li><a href="#" class="lesson-link" data-pdf-src="lesson3.pdf">Lesson 3: Lubrication System</a></li>
+        <li><a href="#" class="lesson-link" data-pdf-src="pdfs/lesson4.pdf">Lesson 4: Fuel System</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h3>AutoLearn PH</h3>
+        <p>Your complete automotive learning companion designed for Filipino learners.</p>
+        <p>Aligned with TESDA standards and industry best practices.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Modules</a></li>
+          <li><a href="#">Learning Materials</a></li>
+          <li><a href="#">About Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Learning Resources</h3>
+        <ul>
+          <li><a href="#">TESDA Online</a></li>
+          <li><a href="#">TESDA YouTube</a></li>
+          <li><a href="#">Automotive Forums</a></li>
+          <li><a href="#">Video Tutorials</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact Information</h3>
+        <p>Email: bagionjamesson12@gmail.com</p>
+        <p>Phone: +63 912 345 6789</p>
+        <p>Location: Valenzuela City, Philippines</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'main.js';
+
+    const lessonLinks = document.querySelectorAll('.lesson-link');
+    const pdfStatusMessage = document.getElementById('pdf-status-message');
+    const pdfCanvas = document.getElementById('pdf-canvas');
+
+    const pdfControlsTop = document.getElementById('pdf-controls-top');
+    const prevButtonTop = document.getElementById('prev-page-top');
+    const nextButtonTop = document.getElementById('next-page-top');
+    const pageNumDisplayTop = document.getElementById('page-num-top');
+    const pageCountDisplayTop = document.getElementById('page-count-top');
+
+    const pdfControlsBottom = document.getElementById('pdf-controls-bottom');
+    const prevButtonBottom = document.getElementById('prev-page-bottom');
+    const nextButtonBottom = document.getElementById('next-page-bottom');
+    const pageNumDisplayBottom = document.getElementById('page-num-bottom');
+    const pageCountDisplayBottom = document.getElementById('page-count-bottom');
+
+    const ctx = pdfCanvas.getContext('2d');
+    let pdfDoc = null;
+    let currentPageNum = 1;
+    let pageRendering = false;
+    let pageNumPending = null;
+    let currentlyActiveLink = null;
+    const scale = 1.5;
+
+    function renderPage(num) {
+      pageRendering = true;
+      pdfDoc.getPage(num).then(page => {
+        const viewport = page.getViewport({ scale });
+        pdfCanvas.height = viewport.height;
+        pdfCanvas.width = viewport.width;
+        const renderContext = { canvasContext: ctx, viewport };
+        return page.render(renderContext).promise;
+      }).then(() => {
+        pageRendering = false;
+        if (pageNumPending !== null) {
+          renderPage(pageNumPending);
+          pageNumPending = null;
+        }
+      });
+
+      pageNumDisplayTop.textContent = num;
+      pageNumDisplayBottom.textContent = num;
+      updateNavButtonStates();
+    }
+
+    function queueRenderPage(num) {
+      if (pageRendering) {
+        pageNumPending = num;
+      } else {
+        renderPage(num);
+      }
+    }
+
+    function updateNavButtonStates() {
+      const isFirst = currentPageNum <= 1;
+      const isLast = currentPageNum >= pdfDoc.numPages;
+      prevButtonTop.disabled = isFirst;
+      prevButtonBottom.disabled = isFirst;
+      nextButtonTop.disabled = isLast;
+      nextButtonBottom.disabled = isLast;
+    }
+
+    function loadPdf(url) {
+      pdfStatusMessage.textContent = `Loading ${url}...`;
+      pdfjsLib.getDocument(url).promise.then(doc => {
+        pdfDoc = doc;
+        currentPageNum = 1;
+        pageCountDisplayTop.textContent = doc.numPages;
+        pageCountDisplayBottom.textContent = doc.numPages;
+        pdfCanvas.style.display = 'block';
+        pdfControlsTop.style.display = 'block';
+        pdfControlsBottom.style.display = 'block';
+        pdfStatusMessage.textContent = '';
+        renderPage(currentPageNum);
+      }).catch(() => {
+        pdfStatusMessage.textContent = 'Error loading PDF.';
+      });
+    }
+
+    lessonLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const src = link.getAttribute('data-pdf-src');
+        if (currentlyActiveLink) currentlyActiveLink.classList.remove('active-lesson');
+        link.classList.add('active-lesson');
+        currentlyActiveLink = link;
+        loadPdf(src);
+        window.scrollTo(0, 0); // optional: scroll to top when loading new PDF
+      });
+    });
+
+    prevButtonTop.addEventListener('click', () => {
+      if (currentPageNum > 1) {
+        currentPageNum--;
+        queueRenderPage(currentPageNum);
+      }
+    });
+
+    nextButtonTop.addEventListener('click', () => {
+      if (currentPageNum < pdfDoc.numPages) {
+        currentPageNum++;
+        queueRenderPage(currentPageNum);
+      }
+    });
+
+    prevButtonBottom.addEventListener('click', () => {
+      if (currentPageNum > 1) {
+        currentPageNum--;
+        queueRenderPage(currentPageNum);
+      }
+    });
+
+    nextButtonBottom.addEventListener('click', () => {
+      if (currentPageNum < pdfDoc.numPages) {
+        currentPageNum++;
+        queueRenderPage(currentPageNum);
+      }
+    });
+
+    // Auto-load the first lesson
+    window.addEventListener('DOMContentLoaded', () => {
+      const firstLesson = document.querySelector('.lesson-link');
+      if (firstLesson) firstLesson.click();
+    });
+  </script>
+
+</body>
+</html>

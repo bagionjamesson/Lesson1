@@ -1,99 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="logo.png"> <!-- Favicon link -->
-    <link rel="stylesheet" href="style.css"> <!-- Link to your external CSS file -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Module 1:Introduction to Automotive Servicing</title>
-    <link rel="stylesheet" href="style.css"> <!-- Font Awesome for icons -->
+  <meta charset="UTF-8" />
+  <title>AutoLearn PH</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
 </head>
 <body>
-    <!-- Section 2: Main Content (White Background) -->
-    <div class="course-page-container">
-        <main class="main-course-content">
-            <!-- Breadcrumb Navigation -->
-            <nav class="breadcrumbs">
-                <a href="https://bagionjamesson.github.io/Home">Home</a> &gt;
-                <a href="https://bagionjamesson.github.io/Modules/">Modules</a> &gt;
-                <span>Introduction to Automotive Servicing</span>
-            </nav>
-            <!-- Course Header: Title and Progress -->
-            <header class="course-header-area">
-                <h1> Introduction to Automotive Servicing </h1>
-                <a href="https://bagionjamesson.github.io/Home/" class="header-home-link-styled">🏠</a> <!-- Path to menu.html, assuming it's one level up -->
-            </header>
 
-            <!-- PDF Viewer Placeholder -->
-             <section class="pdf-viewer-placeholder" id="pdf-viewer-area">
-                <div class="pdf-navigation-controls" id="pdf-controls-top">
-                    <button id="prev-page-top">Previous</button>
-                    <span class="pdf-page-info">Page <span id="page-num-top">0</span> / <span id="page-count-top">0</span></span>
-                    <button id="next-page-top">Next</button>
-                </div>
-                <div id="pdf-status-message">Select a lesson from the outline to view its PDF.</div>
-                <canvas id="pdf-canvas" style="display: none;"></canvas>
-                <div class="pdf-navigation-controls" id="pdf-controls-bottom">
-                    <button id="prev-page-bottom">Previous</button>
-                    <span class="pdf-page-info">Page <span id="page-num-bottom">0</span> / <span id="page-count-bottom">0</span></span>
-                    <button id="next-page-bottom">Next</button>
-                </div>
-            </section>
+  <nav class="navbar">
+    <a href="https://bagionjamesson.github.io/Home/" class="logo" style="text-decoration:none;">
+      <img src="logo.png" alt="AutoLearn PH Logo" />
+      <span class="logo-text">
+        <span class="auto">AUTO</span><span class="learn">LEARN</span><span class="ph">PH</span>
+      </span>
+    </a>
+    <ul>
+      <li><a href="#" class="active">Home</a></li>
+      <li><a href="#">Modules</a></li>
+      <li class="dropdown">
+        <a href="#">Learning Materials</a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Learning Materials</a></li>
+          <li><a href="#">TESDA Online</a></li>
+          <li><a href="#">TESDA YouTube</a></li>
+          <li><a href="#">Automotive Forums</a></li>
+          <li><a href="#">Video Tutorials</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#">About</a>
+        <ul class="dropdown-menu">
+          <li><a href="#">about a-l-c</a></li>
+          <li><a href="#">about james</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
 
-            <!-- Future course content (modules, lessons, etc.) would go here -->
-        </main>
-
-        <!-- Sidebar with Course Outline -->
-        <aside class="course-sidebar">
-            <h3>Course Outline</h3>
-            <div class="course-units">
-                <div class="unit">
-                    <h4>Unit 1: Basics of Automotive Servicing</h4>
-                    <ul class="lessons-list">
-                        <li class="lesson-item">
-                            <a href="javascript:void(0);" class="lesson-link" data-pdf-src="lesson1.pdf">Lesson 1: What is Automotive Servicing?</a>
-                            <!-- Introduction to the concept, goals, and types of servicing. -->
-                        </li>
-                        <li class="lesson-item">
-                            <a href="javascript:void(0);" class="lesson-link" data-pdf-src="lesson2.pdf"
-                               data-is-last-in-unit="true" data-quiz-target="#quiz-unit-1">Lesson 2: Scope and Importance of Automotive Servicing</a>
-                            <!-- Why servicing is essential for vehicle safety, efficiency, and longevity. -->
-                        </li>
-                    </ul>
-                </div>
-                <div class="unit">
-                    <h4>Unit 2: Core Components in Servicing</h4>
-                    <ul class="lessons-list">
-                        <li class="lesson-item">
-                            <a href="javascript:void(0);" class="lesson-link" data-pdf-src="lesson3.pdf">Lesson 1: Engine and Transmission Basics</a>
-                            <!-- Understanding engine parts and transmission systems. -->
-                        </li>
-                        <li class="lesson-item">
-                            <a href="javascript:void(0);" class="lesson-link" data-pdf-src="lesson2.pdf"
-                               data-is-last-in-unit="true" data-quiz-target="#quiz-unit-2">Lesson 2: Electrical Systems Overview</a>
-                            <!-- Basic electrical components and their role. -->
-                        </li>
-                    </ul>
-                </div>
-                <div class="unit">
-                    <h4>Unit 3: Servicing Procedures and Safety</h4>
-                    <ul class="lessons-list">
-                        <li class="lesson-item">
-                            <a href="javascript:void(0);" class="lesson-link" data-pdf-src="lesson5.pdf">Lesson 1: Preventive Maintenance Practices</a>
-                            <!-- Routine checks and maintenance tasks. -->
-                        </li>
-                        <li class="lesson-item">
-                            <a href="javascript:void(0);" class="lesson-link" data-pdf-src="lesson6.pdf">Lesson 2: Safety Precautions During Servicing</a>
-                            <!-- Important safety tips and protocols. -->
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-                <script src="main.js"></script> 
-
-                            <!--For connecting the java script file-->
-
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </aside>
+  <section class="main-section">
+    <!-- PDF Viewer -->
+    <div class="pdf-viewer">
+      <div id="pdf-controls-top">
+        <button id="prev-page-top">Previous</button>
+        <span>Page <span id="page-num-top">1</span> of <span id="page-count-top">--</span></span>
+        <button id="next-page-top">Next</button>
+      </div>
+      <p id="pdf-status-message">Select a lesson to view the PDF.</p>
+      <canvas id="pdf-canvas"></canvas>
+      <div id="pdf-controls-bottom">
+        <button id="prev-page-bottom">Previous</button>
+        <span>Page <span id="page-num-bottom">1</span> of <span id="page-count-bottom">--</span></span>
+        <button id="next-page-bottom">Next</button>
+      </div>
     </div>
+
+    <!-- Course Outline -->
+    <div class="course-outline">
+      <h1>Course Outline</h2>
+      <div class="course-sidebar">
+        <!-- Unit 1 -->
+        <h3 class="unit-title">Unit 1: Basics of Automotive Servicing</h3>
+        <div class="lesson-item" data-pdf-src="lesson1.pdf">
+          
+          <span class="lesson-title">Lesson 1: What is Automotive Servicing?</span>
+          <span class="lesson-status"></span>
+        </div>
+        <div class="lesson-item" data-pdf-src="lesson2.pdf">
+          
+          <span class="lesson-title">Lesson 2: Scope and Importance of Automotive Servicing</span>
+          <span class="lesson-status"></span>
+        </div>
+
+        <!-- Unit 2 -->
+        <h3 class="unit-title">Unit 2: Core Components in Servicing</h3>
+        <div class="lesson-item" data-pdf-src="unit2_lesson1.pdf">
+          
+          <span class="lesson-title">Lesson 1: Engine and Transmission Basics</span>
+          <span class="lesson-status"></span>
+        </div>
+        <div class="lesson-item" data-pdf-src="unit2_lesson2.pdf">
+          
+          <span class="lesson-title">Lesson 2: Electrical Systems Overview</span>
+          <span class="lesson-status"></span>
+        </div>
+
+        <!-- Unit 3 -->
+        <h3 class="unit-title">Unit 3: Servicing Procedures and Safety</h3>
+        <div class="lesson-item" data-pdf-src="unit3_lesson1.pdf">
+          
+          <span class="lesson-title">Lesson 1: Preventive Maintenance Practices</span>
+          <span class="lesson-status"></span>
+        </div>
+        <div class="lesson-item" data-pdf-src="unit3_lesson2.pdf">
+          
+          <span class="lesson-title">Lesson 2: Safety Precautions During Servicing</span>
+          <span class="lesson-status"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h3>AutoLearn PH</h3>
+        <p>Your complete automotive learning companion designed for Filipino learners.</p>
+        <p>Aligned with TESDA standards and industry best practices.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Modules</a></li>
+          <li><a href="#">Learning Materials</a></li>
+          <li><a href="#">About Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Learning Resources</h3>
+        <ul>
+          <li><a href="#">TESDA Online</a></li>
+          <li><a href="#">TESDA YouTube</a></li>
+          <li><a href="#">Automotive Forums</a></li>
+          <li><a href="#">Video Tutorials</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact Information</h3>
+        <p>Email: bagionjamesson12@gmail.com</p>
+        <p>Phone: +63 912 345 6789</p>
+        <p>Location: Valenzuela City, Philippines</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+
 </body>
+</html>
