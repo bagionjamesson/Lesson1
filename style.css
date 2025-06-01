@@ -366,6 +366,137 @@ canvas#pdf-canvas { /* Made selector more specific for clarity */
   padding-left: 0;
 }
 
+.test-item.test-highlight {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fffbe6;
+  border: 1px solid #ffe066;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 8px 0;
+  font-weight: bold;
+  color: #b8860b;
+  box-shadow: 0 1px 3px rgba(255, 215, 0, 0.08);
+}
+
+.test-item.test-highlight .test-title {
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+
+.take-test-btn {
+  margin-left: 16px;
+  padding: 6px 18px;
+  background-color: #ffd600;
+  color: #333;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.take-test-btn:hover {
+  background-color: #ffe066;
+}
+
+.back-btn-container {
+  display: flex;
+  justify-content: flex-start;
+  margin: 24px 0 0 0;
+}
+
+.back-to-modules-btn {
+  display: flex;
+  align-items: center;
+  background: #fffbe6;
+  color: #b8860b;
+  border: 1px solid #ffe066;
+  border-radius: 20px;
+  padding: 8px 22px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(255, 215, 0, 0.08);
+  transition: background 0.2s, color 0.2s;
+  gap: 8px;
+  width: fit-content;
+}
+
+.back-to-modules-btn:hover {
+  background: #ffe066;
+  color: #856404;
+}
+
+.evaluation-btn {
+  margin-left: 16px;
+  padding: 6px 22px;
+  background-color: #ffd600;      /* Yellow background */
+  color: #333;                    /* Dark text */
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background 0.2s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.evaluation-btn:hover {
+  background-color: #ffe066;
+}
+
+.go-hint {
+  background: #43b66e;        /* Green background */
+  color: #fff;                /* White text */
+  border-radius: 12px;
+  padding: 2px 10px;
+  font-size: 0.95em;
+  font-weight: bold;
+  margin-left: 8px;
+  border: none;
+}
+
+.evaluation-slot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #e6fff2; /* light green background */
+  border: 1.5px solid #43b66e; /* green border */
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 8px 0;
+  font-weight: bold;
+  color: #218c4a; /* dark green text */
+  box-shadow: 0 1px 3px rgba(67, 182, 110, 0.08);
+}
+
+.evaluation-slot .test-title {
+  font-size: 1rem;
+  letter-spacing: 1px;
+  color: #218c4a;
+}
+
+.go-btn {
+  margin-left: 16px;
+  padding: 6px 22px;
+  background-color: #43b66e;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background 0.2s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.go-btn:hover {
+  background-color: #2e8b57;
+}
+
 @media (max-width: 768px) {
   .main-section {
     flex-direction: column;

@@ -171,13 +171,35 @@ document.addEventListener('DOMContentLoaded', () => {
     setupPageNavButton(prevButtonBottom, 'prev');
     setupPageNavButton(nextButtonBottom, 'next');
 
-    // Auto-load the first lesson
-    const firstLesson = document.querySelector('.lesson-item'); // Updated selector
+    // Show lesson1.pdf by default on page load
+    const firstLesson = document.querySelector('.lesson-item[data-pdf-src="lesson1.pdf"]');
     if (firstLesson) {
         firstLesson.click();
-    } else {
-        if (pdfStatusMessage.textContent.trim() === 'Select a lesson to view the PDF.' || pdfStatusMessage.textContent.trim() === '') {
-             pdfStatusMessage.textContent = 'No lessons available to load automatically.';
-        }
     }
+
+    document.querySelectorAll('.take-test-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const formUrl = this.parentElement.getAttribute('data-form-url');
+        if (formUrl) {
+          document.getElementById('pdf-canvas').style.display = 'none';
+          document.getElementById('pdf-controls-top').style.display = 'none';
+          document.getElementById('pdf-controls-bottom').style.display = 'none';
+          document.getElementById('pdf-status-message').style.display = 'none';
+          document.getElementById('form-viewer').src = formUrl;
+          document.getElementById('form-viewer').style.display = 'block';
+        }
+      });
+    });
+
+    // Optional: When a lesson is clicked, hide the form and show the PDF viewer again
+    document.querySelectorAll('.lesson-item, .test-item').forEach(item => {
+      item.addEventListener('click', function() {
+        document.getElementById('form-viewer').style.display = 'none';
+        document.getElementById('pdf-canvas').style.display = 'block';
+        document.getElementById('pdf-controls-top').style.display = 'flex';
+        document.getElementById('pdf-controls-bottom').style.display = 'flex';
+        document.getElementById('pdf-status-message').style.display = 'block';
+      });
+    });
 });

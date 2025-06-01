@@ -50,6 +50,7 @@
       </div>
       <p id="pdf-status-message">Select a lesson to view the PDF.</p>
       <canvas id="pdf-canvas"></canvas>
+      <iframe id="form-viewer" style="display:none; width:100%; height:600px; border:none;"></iframe>
       <div id="pdf-controls-bottom">
         <button id="prev-page-bottom">Previous</button>
         <span>Page <span id="page-num-bottom">1</span> of <span id="page-count-bottom">--</span></span>
@@ -59,46 +60,76 @@
 
     <!-- Course Outline -->
     <div class="course-outline">
-      <h1>Course Outline</h2>
+      <h1>Course Outline</h1>
       <div class="course-sidebar">
         <!-- Unit 1 -->
         <h3 class="unit-title">Unit 1: Basics of Automotive Servicing</h3>
+        <div class="test-item test-highlight pre-test" data-pdf-src="unit1_pretest.pdf" data-form-url="https://docs.google.com/forms/d/1YIkhh7ZtcexC16i1J2uGtaQPolGd6qx6zDdmOHJ00AU/edit">
+          <span class="test-title">Pre-Test: Unit 1</span>
+          <button class="take-test-btn">Take the Test</button>
+        </div>
         <div class="lesson-item" data-pdf-src="lesson1.pdf">
-          
           <span class="lesson-title">Lesson 1: What is Automotive Servicing?</span>
           <span class="lesson-status"></span>
         </div>
         <div class="lesson-item" data-pdf-src="lesson2.pdf">
-          
           <span class="lesson-title">Lesson 2: Scope and Importance of Automotive Servicing</span>
           <span class="lesson-status"></span>
+        </div>
+        <div class="test-item test-highlight post-test" data-pdf-src="unit1_posttest.pdf" data-form-url="https://forms.gle/unit1posttest">
+          <span class="test-title">Post-Test: Unit 1</span>
+          <button class="take-test-btn">Take the Test</button>
         </div>
 
         <!-- Unit 2 -->
         <h3 class="unit-title">Unit 2: Core Components in Servicing</h3>
+        <div class="test-item test-highlight pre-test" data-pdf-src="unit2_pretest.pdf" data-form-url="https://forms.gle/unit2pretest">
+          <span class="test-title">Pre-Test: Unit 2</span>
+          <button class="take-test-btn">Take the Test</button>
+        </div>
         <div class="lesson-item" data-pdf-src="unit2_lesson1.pdf">
-          
           <span class="lesson-title">Lesson 1: Engine and Transmission Basics</span>
           <span class="lesson-status"></span>
         </div>
         <div class="lesson-item" data-pdf-src="unit2_lesson2.pdf">
-          
           <span class="lesson-title">Lesson 2: Electrical Systems Overview</span>
           <span class="lesson-status"></span>
+        </div>
+        <div class="test-item test-highlight post-test" data-pdf-src="unit2_posttest.pdf" data-form-url="https://forms.gle/unit2posttest">
+          <span class="test-title">Post-Test: Unit 2</span>
+          <button class="take-test-btn">Take the Test</button>
         </div>
 
         <!-- Unit 3 -->
         <h3 class="unit-title">Unit 3: Servicing Procedures and Safety</h3>
+        <div class="test-item test-highlight pre-test" data-pdf-src="unit3_pretest.pdf" data-form-url="https://forms.gle/unit3pretest">
+          <span class="test-title">Pre-Test: Unit 3</span>
+          <button class="take-test-btn">Take the Test</button>
+        </div>
         <div class="lesson-item" data-pdf-src="unit3_lesson1.pdf">
-          
           <span class="lesson-title">Lesson 1: Preventive Maintenance Practices</span>
           <span class="lesson-status"></span>
         </div>
         <div class="lesson-item" data-pdf-src="unit3_lesson2.pdf">
-          
           <span class="lesson-title">Lesson 2: Safety Precautions During Servicing</span>
           <span class="lesson-status"></span>
         </div>
+        <div class="test-item test-highlight post-test" data-pdf-src="unit3_posttest.pdf" data-form-url="https://forms.gle/unit3posttest">
+          <span class="test-title">Post-Test: Unit 3</span>
+          <button class="take-test-btn">Take the Test</button>
+        </div>
+        <div class="test-item evaluation-slot">
+          <span class="test-title">Evaluation and Get Certificate</span>
+          <button class="go-btn" onclick="window.open('https://your-evaluation-form-link', '_blank')">
+            GO
+          </button>
+        </div>
+      </div> <!-- End of .course-sidebar -->
+
+      <div class="back-btn-container">
+        <button class="back-to-modules-btn" onclick="window.location.href='../index.html'">
+          <i class="fas fa-arrow-left"></i> Back to Modules
+        </button>
       </div>
     </div>
   </section>
